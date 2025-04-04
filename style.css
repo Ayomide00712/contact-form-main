@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  background: hsl(148, 38%, 91%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main {
+  display: inline-block;
+  background-color: #fff;
+  padding: 30px;
+  margin-top: 5%;
+}
+.form-group{
+    margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 20px;
+}
+
+.usernames {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.usernames input {
+  width: 100%;
+  padding: 10px ;
+  border-radius: 5px;
+  border: 1px solid hsl(187, 24%, 22%);
+}
+
+.email input{
+ width: 100%;
+ padding: 10px;
+ 
+}
+
+.left,
+.right {
+  flex: 1;
+}
+.radio-group{
+    display: flex;
+    gap: 10px;
+}
+.radio-button{
+    border: 1px solid hsl(187, 24%, 22%);
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
