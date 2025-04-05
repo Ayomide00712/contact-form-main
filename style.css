@@ -107,9 +107,10 @@ input[type="checkbox"] {
   border: 2px solid hsl(169, 82%, 27%);
 }
 .pop-container {
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 40%;
+  transform: translateX(-50%);
   background: hsl(187, 24%, 22%);
   padding: 20px;
   border-radius: 10px;
@@ -179,5 +180,9 @@ button {
     }
     .radio-button{
         padding: 10px;
+    }
+    .pop-container{
+        left: 50%;
+        width: 100%;
     }
 }
