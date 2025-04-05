@@ -42,7 +42,7 @@ main {
 .usernames input {
   width: 100%;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid hsl(169, 82%, 27%);
   cursor: pointer;
 }
@@ -53,8 +53,8 @@ main {
 .email input {
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid hsl(187, 24%, 22%);
+  border-radius: 10px;
+  border: 1px solid hsl(169, 82%, 27%);
   cursor: pointer;
 }
 
@@ -69,7 +69,7 @@ main {
 .radio-button {
   flex: 1;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 0.8px solid hsl(187, 24%, 22%);
   cursor: pointer;
 }
@@ -116,6 +116,9 @@ input[type="checkbox"] {
   color: #fff;
   opacity: 0;
 }
+.active{
+    opacity: 1;
+}
 .pop-container h2 {
   font-size: 16px;
   display: flex;
@@ -138,15 +141,43 @@ button {
   font-size: 16px;
   color: #fff;
   cursor: pointer;
+  border-radius: 10px;
 }
 .error{
     color: red;
 }
-
+.error-input {
+    border-color: red !important;
+  }
 .attribution {
-  font-size: 11px;
+    margin-top: 10px;
+  font-size: 16px;
   text-align: center;
 }
 .attribution a {
   color: hsl(228, 45%, 44%);
+}
+@media(max-width: 600px){
+
+    .main{
+        width: 90%;
+    }
+    .usernames{
+        /* flex-direction: column; */
+        display: block;
+    }
+    .usernames input{
+        width: 100%;
+        padding: 15px 20px;
+    }
+    .email input{
+        padding: 15px 20px;
+    }
+    .radio-group{
+        flex-direction: column;
+        gap: 15px;
+    }
+    .radio-button{
+        padding: 10px;
+    }
 }
