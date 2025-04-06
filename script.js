@@ -1,82 +1,144 @@
-function validateForm(event) {
-  event.preventDefault();
-
-  let isValid = true;
-
-  //   Getting the input
+// validating firstname
+function validateFirstName() {
   const firstNameInput = document.getElementById("first-name");
-  const lastNameInput = document.getElementById("last-name");
-  const emailInput = document.getElementById("email-address");
-  const generalBtn = document.getElementById("generalBtn");
-  const supportBtn = document.getElementById("support");
-  const messageInput = document.getElementById("Message");
-  const checkbox = document.getElementById("checkbox");
-
-  //   Getting the input value
   const firstName = document.getElementById("first-name").value;
-  const lastName = document.getElementById("last-name").value;
-  const email = document.getElementById("email-address").value;
+  const firstNameError = document.getElementById("firstname-error");
 
-  const message = document.getElementById("Message").value;
-
-  // First name validation
-  let firstNameError = document.getElementById("firstname-error");
   if (firstName.length === 0) {
-    firstNameError.textContent = " First name is required";
+    firstNameError.innerHTML = "This field is required";
     firstNameInput.classList.add("error-input");
-    isValid = false;
+    return false;
+  } else {
+    firstNameError.innerHTML = "";
+    firstNameInput.classList.remove("error-input");
+    return true;
   }
+}
 
-  //   last name validation
-  let secondNameError = document.getElementById("secondname-error");
+// validatin lastname
+function validateLastName() {
+  const lastNameInput = document.getElementById("last-name");
+  const lastNameError = document.getElementById("lastname-error");
+  const lastName = lastNameInput.value.trim();
+
   if (lastName.length === 0) {
-    secondNameError.textContent = " Last name is required";
+    lastNameError.innerHTML = "Last name is required";
     lastNameInput.classList.add("error-input");
-    isValid = false;
+    return false;
+  } else {
+    lastNameError.innerHTML = "";
+    lastNameInput.classList.remove("error-input");
+    return true;
   }
+}
 
-  // Email validation
-  let emailError = document.getElementById("email-error");
+// Validting email
+function validateEmail() {
+  const emailInput = document.getElementById("email-address");
+  const emailError = document.getElementById("email-error");
+  const email = emailInput.value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   if (email.length === 0) {
-    emailError.innerHTML = " This field is required";
+    emailError.innerHTML = "This field is required";
     emailInput.classList.add("error-input");
-    isValid = false;
+    return false;
   } else if (!emailRegex.test(email)) {
     emailError.innerHTML = "Use the proper email format";
     emailInput.classList.add("error-input");
-    isValid = false;
+    return false;
+  } else {
+    emailError.innerHTML = "";
+    emailInput.classList.remove("error-input");
+    return true;
   }
-
-  // Validate query
-  let queryError = document.getElementById("query-error");
-  if (!generalBtn.checked && !supportBtn.checked) {
-    queryError.innerHTML = "Please select a query";
-    isValid = false;
-  }
-
-  // Validate message
+}
+function validateMessage() {
+  const messageInput = document.getElementById("message");
   const messageError = document.getElementById("message-error");
+  const message = messageInput.value.trim();
+
   if (message.length === 0) {
     messageError.innerHTML = "Message is required";
     messageInput.classList.add("error-input");
-    isValid = false;
+    return false;
+  } else {
+    messageError.innerHTML = "";
+    messageInput.classList.remove("error-input");
+    return true;
   }
+}
+function validateQueryType() {
+  const generalBtn = document.getElementById("generalBtn");
+  const supportBtn = document.getElementById("support");
+  const enquiryError = document.getElementById("query-error");
 
-  // Validate checkbox
-  const checkboxError = document.getElementById("check-error");
-  if (!checkbox.checked) {
-    checkboxError.innerHTML =
-      "To submit this form please consent to being contacted";
-    isValid = false;
+  if (!generalBtn.checked && !supportBtn.checked) {
+    enquiryError.innerHTML = "Please select a query type";
+    return false;
+  } else {
+    enquiryError.innerHTML = "";
+    return true;
   }
+}
+function validateCheckbox() {
+  const checkbox = document.getElementById("checkbox");
+  const checkboxError = document.getElementById("check-error");
+
+  if (!checkbox.checked) {
+    checkboxError.innerHTML = "You must consent to being contacted";
+    return false;
+  } else {
+    checkboxError.innerHTML = "";
+    return true;
+  }
+}
+document
+  .getElementById("first-name")
+  .addEventListener("input", validateFirstName);
+document
+  .getElementById("last-name")
+  .addEventListener("input", validateLastName);
+document
+  .getElementById("email-address")
+  .addEventListener("input", validateEmail);
+document.getElementById("message").addEventListener("input", validateMessage);
+document
+  .getElementById("generalBtn")
+  .addEventListener("change", validateQueryType);
+document
+  .getElementById("support")
+  .addEventListener("change", validateQueryType);
+document
+  .getElementById("checkbox")
+  .addEventListener("change", validateCheckbox);
+
+function validateForm(event) {
+  event.preventDefault();
+
+  // Run all validations
+  const isFirstNameValid = validateFirstName();
+  const isLastNameValid = validateLastName();
+  const isEmailValid = validateEmail();
+  const isMessageValid = validateMessage();
+  const isQueryTypeValid = validateQueryType();
+  const isCheckboxValid = validateCheckbox();
+
+  // Check if all fields are valid
+  const isValid =
+    isFirstNameValid &&
+    isLastNameValid &&
+    isEmailValid &&
+    isMessageValid &&
+    isQueryTypeValid &&
+    isCheckboxValid;
 
   if (isValid) {
-    const popMessage = document.querySelector(".pop-container");
-    popMessage.classList.add("active");
+    const popContainer = document.querySelector(".pop-container");
+    popContainer.classList.add("active");
     setTimeout(() => {
-      popMessage.classList.remove("active");
-    }, 3000);
+      popContainer.classList.remove("active");
+    }, 3000); // Hide after 3 seconds
     document.getElementById("contact-form").reset();
   }
 
